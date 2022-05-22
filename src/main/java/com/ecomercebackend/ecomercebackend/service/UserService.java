@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.ecomercebackend.ecomercebackend.models.ERoleType.ROLE_USER;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
