@@ -1,7 +1,6 @@
 package com.ecomercebackend.ecomercebackend.controller;
 
 
-import com.ecomercebackend.ecomercebackend.dto.ProductIdCategoryId;
 import com.ecomercebackend.ecomercebackend.models.Category;
 import com.ecomercebackend.ecomercebackend.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/category")
@@ -31,10 +31,5 @@ public class CategoryController {
         return ResponseEntity.ok(createdCategory);
     }
 
-    @PutMapping("/addProductToCategory")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Category> addProductToCategory(@RequestBody ProductIdCategoryId productIdCategoryId){
-        Category category = categoryService.addProduct(productIdCategoryId);
-        return ResponseEntity.ok(category);
-    }
+
 }
