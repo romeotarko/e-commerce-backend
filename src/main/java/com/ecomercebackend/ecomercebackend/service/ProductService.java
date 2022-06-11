@@ -2,6 +2,7 @@ package com.ecomercebackend.ecomercebackend.service;
 
 import com.ecomercebackend.ecomercebackend.Exceptions.EcommerceApplicationException;
 import com.ecomercebackend.ecomercebackend.dto.ProductCreateRequest;
+import com.ecomercebackend.ecomercebackend.dto.ProductSearchDto;
 import com.ecomercebackend.ecomercebackend.dto.ProductUpdateRequest;
 import com.ecomercebackend.ecomercebackend.models.Category;
 import com.ecomercebackend.ecomercebackend.models.Product;
@@ -79,5 +80,9 @@ public class ProductService {
 
         product.setCategory(category);
         return productRepository.saveAndFlush(product);
+    }
+
+    public List<Product> search(ProductSearchDto productSearchDto) {
+        return productRepository.findAllByNameOrDescription(productSearchDto.getName(),productSearchDto.getDescription());
     }
 }

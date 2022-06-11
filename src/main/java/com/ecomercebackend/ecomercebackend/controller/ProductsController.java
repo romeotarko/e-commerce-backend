@@ -1,6 +1,7 @@
 package com.ecomercebackend.ecomercebackend.controller;
 
 import com.ecomercebackend.ecomercebackend.dto.ProductCreateRequest;
+import com.ecomercebackend.ecomercebackend.dto.ProductSearchDto;
 import com.ecomercebackend.ecomercebackend.dto.ProductUpdateRequest;
 import com.ecomercebackend.ecomercebackend.models.Category;
 import com.ecomercebackend.ecomercebackend.models.Product;
@@ -26,6 +27,13 @@ public class ProductsController {
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<List<Product>> getAll() {
         List<Product> products = productService.getAll();
+        return ResponseEntity.ok(products);
+    }
+
+    @PostMapping("/search")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    public ResponseEntity<List<Product>> search(@RequestBody ProductSearchDto productSearchDto){
+        List<Product> products=productService.search(productSearchDto);
         return ResponseEntity.ok(products);
     }
 
