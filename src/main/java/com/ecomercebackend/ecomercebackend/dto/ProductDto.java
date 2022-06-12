@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductUpdateRequest {
+public class ProductDto {
 
     @NotBlank(message = "Name field must not be empty")
     private String name;
@@ -24,5 +24,4 @@ public class ProductUpdateRequest {
 
     @NotBlank(message = "Unit in stock field must not be empty")
     private String unit_in_stock;
-
 }

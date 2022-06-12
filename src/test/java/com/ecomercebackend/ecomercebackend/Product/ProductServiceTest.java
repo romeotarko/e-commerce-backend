@@ -1,7 +1,6 @@
 package com.ecomercebackend.ecomercebackend.Product;
 
-import com.ecomercebackend.ecomercebackend.dto.ProductCreateRequest;
-import com.ecomercebackend.ecomercebackend.dto.ProductUpdateRequest;
+import com.ecomercebackend.ecomercebackend.dto.ProductDto;
 import com.ecomercebackend.ecomercebackend.models.Product;
 import com.ecomercebackend.ecomercebackend.repository.ProductRepository;
 import com.ecomercebackend.ecomercebackend.service.ProductService;
@@ -23,36 +22,38 @@ public class ProductServiceTest {
     private ProductRepository productRepository;
 
 
+   //TODO test create product
+
     @Test
-    void should_add_product(){
-        ProductCreateRequest productCreateRequest=new ProductCreateRequest(
+    void should_add_product_to_chart(){
+        ProductDto productDto =new ProductDto(
                 "Book",
                 "12",
                 "Best book",
                 "12"
         );
-        productService.addProduct(productCreateRequest);
+        productService.addProductToChart(productDto);
         List<Product> allProducts=productRepository.findAll();
         then(allProducts).isNotEmpty();
     }
 
     @Test
     void should_update_product(){
-        ProductCreateRequest productCreateRequest=new ProductCreateRequest(
+        ProductDto productDto =new ProductDto(
                 "BookTest",
                 "121",
                 "Best",
                 "13"
         );
-       Product existingProduct= productService.addProduct(productCreateRequest);
+       Product existingProduct= productService.addProductToChart(productDto);
 
-        ProductUpdateRequest productUpdateRequest = new ProductUpdateRequest(
+        ProductDto productToBeUpdated = new ProductDto(
                 "book",
                 "12",
                 "test1",
                 "14"
         );
-        Product updateProduct=productService.updateProduct(existingProduct.getId(),productUpdateRequest);
+        Product updateProduct=productService.updateProduct(existingProduct.getId(),productToBeUpdated);
 
         then(updateProduct).isNotNull();
         then(updateProduct.getName()).isEqualTo("book");

@@ -1,9 +1,8 @@
 package com.ecomercebackend.ecomercebackend.service;
 
 import com.ecomercebackend.ecomercebackend.Exceptions.EcommerceApplicationException;
-import com.ecomercebackend.ecomercebackend.dto.ProductCreateRequest;
+import com.ecomercebackend.ecomercebackend.dto.ProductDto;
 import com.ecomercebackend.ecomercebackend.dto.ProductSearchDto;
-import com.ecomercebackend.ecomercebackend.dto.ProductUpdateRequest;
 import com.ecomercebackend.ecomercebackend.models.Category;
 import com.ecomercebackend.ecomercebackend.models.Product;
 import com.ecomercebackend.ecomercebackend.repository.ProductRepository;
@@ -33,27 +32,27 @@ public class ProductService {
         return productRepository.saveAndFlush(product);
     }
 
-    public Product addProduct(ProductCreateRequest productCreateRequest) {
-        if (productRepository.existsByName(productCreateRequest.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Product with name: " + productCreateRequest.getName() + " exists"));
+    public Product addProductToChart(ProductDto productDto) {
+        if (productRepository.existsByName(productDto.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Product with name: " + productDto.getName() + " exists"));
         }
         Product product = new Product();
         product.setId(UUID.fromString(UUID.randomUUID().toString()));
-        product.setName(productCreateRequest.getName());
-        product.setDescription(productCreateRequest.getDescription());
-        product.setPrice(productCreateRequest.getPrice());
-        product.setUnit_in_stock(productCreateRequest.getUnit_in_stock());
+        product.setName(productDto.getName());
+        product.setDescription(productDto.getDescription());
+        product.setPrice(productDto.getPrice());
+        product.setUnit_in_stock(productDto.getUnit_in_stock());
 
         return productRepository.saveAndFlush(product);
     }
 
-    public Product updateProduct(UUID id, ProductUpdateRequest productUpdateRequest) {
+    public Product updateProduct(UUID id, ProductDto productDto) {
 
         Product product = productRepository.getById(id);
-        product.setName(productUpdateRequest.getName());
-        product.setPrice(productUpdateRequest.getPrice());
-        product.setDescription(productUpdateRequest.getDescription());
-        product.setUnit_in_stock(productUpdateRequest.getUnit_in_stock());
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
+        product.setDescription(productDto.getDescription());
+        product.setUnit_in_stock(productDto.getUnit_in_stock());
 
         return productRepository.saveAndFlush(product);
     }

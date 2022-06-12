@@ -1,8 +1,7 @@
 package com.ecomercebackend.ecomercebackend.controller;
 
-import com.ecomercebackend.ecomercebackend.dto.ProductCreateRequest;
+import com.ecomercebackend.ecomercebackend.dto.ProductDto;
 import com.ecomercebackend.ecomercebackend.dto.ProductSearchDto;
-import com.ecomercebackend.ecomercebackend.dto.ProductUpdateRequest;
 import com.ecomercebackend.ecomercebackend.models.Product;
 import com.ecomercebackend.ecomercebackend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,17 +48,17 @@ public class ProductsController {
         return ResponseEntity.ok(createdProduct);
     }
 
-    @PostMapping("/addProduct")
+    @PostMapping("/addProductToChart")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Product> addProduct(@Valid @RequestBody ProductCreateRequest productCreateRequest) {
-        Product addProduct = productService.addProduct(productCreateRequest);
+    public ResponseEntity<Product> addProductToChart(@Valid @RequestBody ProductDto productDto) {
+        Product addProduct = productService.addProductToChart(productDto);
         return new ResponseEntity<>(addProduct, HttpStatus.OK);
     }
 
     @PutMapping("/updateProduct{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Product> updateProduct(@PathVariable("ID") UUID id, @RequestBody ProductUpdateRequest productUpdateRequest) {
-        Product updateProduct = productService.updateProduct(id, productUpdateRequest);
+    public ResponseEntity<Product> updateProduct(@PathVariable("ID") UUID id, @RequestBody ProductDto productDto) {
+        Product updateProduct = productService.updateProduct(id, productDto);
         return new ResponseEntity<>(updateProduct, HttpStatus.OK);
     }
 
