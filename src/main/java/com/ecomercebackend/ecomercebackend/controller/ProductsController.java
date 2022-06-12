@@ -3,7 +3,6 @@ package com.ecomercebackend.ecomercebackend.controller;
 import com.ecomercebackend.ecomercebackend.dto.ProductCreateRequest;
 import com.ecomercebackend.ecomercebackend.dto.ProductSearchDto;
 import com.ecomercebackend.ecomercebackend.dto.ProductUpdateRequest;
-import com.ecomercebackend.ecomercebackend.models.Category;
 import com.ecomercebackend.ecomercebackend.models.Product;
 import com.ecomercebackend.ecomercebackend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
