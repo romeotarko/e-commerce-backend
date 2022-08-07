@@ -36,6 +36,10 @@ public class ProductService {
         if (productRepository.existsByName(productDto.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Product with name: " + productDto.getName() + " exists"));
         }
+        if(productRepository.getUnitInStockFromProductName(productDto.getName()) == 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Product name: " + productDto.getName() + " doesn't have unit in stock"));
+        }
+
         Product product = new Product();
         product.setId(UUID.fromString(UUID.randomUUID().toString()));
         product.setName(productDto.getName());
