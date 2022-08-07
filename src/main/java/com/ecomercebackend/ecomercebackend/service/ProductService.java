@@ -37,7 +37,7 @@ public class ProductService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Product with name: " + productDto.getName() + " exists"));
         }
         if(productRepository.getUnitInStockFromProductName(productDto.getName()) == 0){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Product name: " + productDto.getName() + " doesn't have unit in stock"));
+            throw new EcommerceApplicationException("Product name: " + productDto.getName() + " doesn't have unit in stock",HttpStatus.NOT_FOUND);
         }
 
         Product product = new Product();

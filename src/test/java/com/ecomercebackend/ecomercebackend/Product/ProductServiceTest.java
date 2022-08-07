@@ -1,5 +1,6 @@
 package com.ecomercebackend.ecomercebackend.Product;
 
+import com.ecomercebackend.ecomercebackend.Exceptions.EcommerceApplicationException;
 import com.ecomercebackend.ecomercebackend.dto.ProductDto;
 import com.ecomercebackend.ecomercebackend.models.Product;
 import com.ecomercebackend.ecomercebackend.repository.ProductRepository;
@@ -11,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 public class ProductServiceTest {
@@ -45,6 +48,21 @@ public class ProductServiceTest {
         productService.addProductToChart(productDto);
         List<Product> allProducts=productRepository.findAll();
         then(allProducts).isNotEmpty();
+    }
+
+    @Test
+    void should_fail_add_to_chart_when_doesnt_have_unit_in_stock(){
+        ProductDto productDto =new ProductDto(
+                "Book",
+                "12",
+                "Best book",
+                "0"
+        );
+        EcommerceApplicationException exception = assertThrows(EcommerceApplicationException.class, () -> {
+            productService.addProductToChart(productDto);
+        });
+
+        assertEquals("Product doesn't have unit in stock", exception.getErrorMessage());
     }
 
     @Test
