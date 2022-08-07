@@ -29,5 +29,11 @@ public class Category implements Serializable {
 
     @OneToMany(mappedBy = "category")
     private List<Product> products;
+
+
+    //This constructor is created for Unit Test purpose
+    public Category(String name) {
+        this.name = name;
+    }
 }
 

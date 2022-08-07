@@ -46,4 +46,12 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
+
+    //This constructor is created for Unit Test purpose
+    public Product(String name, String price, String description, String unit_in_stock) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.unit_in_stock = unit_in_stock;
+    }
 }

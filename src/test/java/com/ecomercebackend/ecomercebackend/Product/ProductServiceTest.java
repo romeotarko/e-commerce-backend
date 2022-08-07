@@ -22,7 +22,17 @@ public class ProductServiceTest {
     private ProductRepository productRepository;
 
 
-   //TODO test create product
+    @Test
+    void should_create_product(){
+        Product product=new Product(
+                "Book1",
+                "14",
+                "Best one",
+                "1"
+        );
+        productService.create(product);
+        then(product.getName()).isEqualTo("Book1");
+    }
 
     @Test
     void should_add_product_to_chart(){
