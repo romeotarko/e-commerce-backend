@@ -46,6 +46,11 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @NotFound(action = NotFoundAction.IGNORE)
+    @JoinColumn(name = "productchart_id", referencedColumnName = "id")
+    private Productchart productchart;
+
 
     //This constructor is created for Unit Test purpose
     public Product(String name, String price, String description, String unit_in_stock) {

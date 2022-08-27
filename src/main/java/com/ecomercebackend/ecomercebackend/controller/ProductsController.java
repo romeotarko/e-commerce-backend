@@ -3,6 +3,7 @@ package com.ecomercebackend.ecomercebackend.controller;
 import com.ecomercebackend.ecomercebackend.dto.ProductDto;
 import com.ecomercebackend.ecomercebackend.dto.ProductSearchDto;
 import com.ecomercebackend.ecomercebackend.models.Product;
+import com.ecomercebackend.ecomercebackend.models.Productchart;
 import com.ecomercebackend.ecomercebackend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,20 @@ public class ProductsController {
     public ResponseEntity<Product> addProductToChart(@Valid @RequestBody ProductDto productDto) {
         Product addProduct = productService.addProductToChart(productDto);
         return new ResponseEntity<>(addProduct, HttpStatus.OK);
+    }
+    @DeleteMapping("/removeProductFromChart")
+    @PreAuthorize("hasRole('User')")
+    public ResponseEntity<?> removeProductFromChart(@PathVariable("ID") UUID id){
+        productService.deleteProduct(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //TODO finish this
+    @PutMapping("/finishOrder")
+    @PreAuthorize("hasRole('User')")
+    public ResponseEntity<Productchart> finishOrder(@PathVariable("ID") UUID id, @RequestBody Productchart productchart){
+        Productchart submitRequest = productService.finishOrder(id, productchart);
+        return new ResponseEntity<>(submitRequest, HttpStatus.OK);
     }
 
     @PutMapping("/updateProduct{id}")

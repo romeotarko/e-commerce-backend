@@ -11,7 +11,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +19,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Order implements Serializable {
+public class Productchart implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,24 +28,12 @@ public class Order implements Serializable {
 
     @NotBlank
     @Size(max = 120)
-    private String address;
+    private String name;
 
-    @NotBlank
-    @Size(max = 120)
-    private String credit_card;
+    @OneToMany(mappedBy = "productchart")
+    private List<Product> products;
 
-    @NotBlank
-    @Size(max = 120)
-    private Date date;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private User user;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name = "productchart_id", referencedColumnName = "id")
-    private Productchart productchart;
-
+    @OneToOne(mappedBy = "productchart")
+    private Order order;
 
 }

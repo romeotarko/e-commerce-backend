@@ -5,6 +5,7 @@ import com.ecomercebackend.ecomercebackend.dto.ProductDto;
 import com.ecomercebackend.ecomercebackend.dto.ProductSearchDto;
 import com.ecomercebackend.ecomercebackend.models.Category;
 import com.ecomercebackend.ecomercebackend.models.Product;
+import com.ecomercebackend.ecomercebackend.models.Productchart;
 import com.ecomercebackend.ecomercebackend.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,11 @@ public class ProductService {
         product.setUnit_in_stock(productDto.getUnit_in_stock());
 
         return productRepository.saveAndFlush(product);
+    }
+
+    //TODO finish this
+    public Productchart finishOrder(UUID id, Productchart productchart) {
+       return null;
     }
 
     public Product updateProduct(UUID id, ProductDto productDto) {
