@@ -22,7 +22,7 @@ public class SwaggerConfig {
                 .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(Arrays.asList(apiKey()))
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.lufthansa.travelagency"))
+                .apis(RequestHandlerSelectors.basePackage("com.ecomercebackend.ecomercebackend"))
                 .paths(PathSelectors.any())
                 .build();
     }
