@@ -46,7 +46,6 @@ public class ProductService {
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
-        product.setUnit_in_stock(productDto.getUnit_in_stock());
 
         return productRepository.saveAndFlush(product);
     }

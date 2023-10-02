@@ -32,6 +32,6 @@ public class Productchart implements Serializable {
     private List<Product> products;
 
     @OneToOne(mappedBy = "productchart")
-    private Order order;
+    private Orders order;
 
 }

@@ -40,10 +40,9 @@ public class ProductServiceTest {
     @Test
     void should_add_product_to_chart(){
         ProductDto productDto =new ProductDto(
-                "Book",
+                "Book1",
                 "12",
-                "Best book",
-                "12"
+                "Best book"
         );
         productService.addProductToChart(productDto);
         List<Product> allProducts=productRepository.findAll();
@@ -55,8 +54,7 @@ public class ProductServiceTest {
         ProductDto productDto =new ProductDto(
                 "Book",
                 "12",
-                "Best book",
-                "0"
+                "Best book"
         );
         EcommerceApplicationException exception = assertThrows(EcommerceApplicationException.class, () -> {
             productService.addProductToChart(productDto);

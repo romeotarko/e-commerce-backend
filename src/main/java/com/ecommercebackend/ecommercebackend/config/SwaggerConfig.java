@@ -16,16 +16,18 @@ import java.util.List;
 
 @Configuration
 public class SwaggerConfig {
+
+    //Removed swagger config
+    /*
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(Arrays.asList(apiKey()))
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.ecomercebackend.ecomercebackend"))
                 .paths(PathSelectors.any())
                 .build();
-    }
+    } */
 
     private SecurityContext securityContext() {
         return SecurityContext.builder().securityReferences(defaultAuth()).build();
