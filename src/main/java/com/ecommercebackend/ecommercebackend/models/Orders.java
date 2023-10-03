@@ -43,7 +43,6 @@ public class Orders implements Serializable {
     private User user;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "productchart_id", referencedColumnName = "id")
     private Productchart productchart;
 

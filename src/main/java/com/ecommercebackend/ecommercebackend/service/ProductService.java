@@ -6,7 +6,9 @@ import com.ecommercebackend.ecommercebackend.dto.ProductSearchDto;
 import com.ecommercebackend.ecommercebackend.models.Category;
 import com.ecommercebackend.ecommercebackend.models.Product;
 import com.ecommercebackend.ecommercebackend.models.Productchart;
+import com.ecommercebackend.ecommercebackend.repository.OrdersRepository;
 import com.ecommercebackend.ecommercebackend.repository.ProductRepository;
+import com.ecommercebackend.ecommercebackend.repository.ProductchartRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,10 @@ public class ProductService {
     private ProductRepository productRepository;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private ProductchartRepository productchartRepository;
+    @Autowired
+    private OrdersRepository ordersRepository;
 
     public List<Product> getAll() {
         return productRepository.findAll();
@@ -33,25 +39,25 @@ public class ProductService {
         return productRepository.saveAndFlush(product);
     }
 
-    public Product addProductToChart(ProductDto productDto) {
-        if (productRepository.existsByName(productDto.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Product with name: " + productDto.getName() + " exists"));
+    public Productchart addProductToChart(String productName) {
+        if (productRepository.existsByName(productName)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Product with name: " + productName + " exists"));
         }
-        if(productRepository.getUnitInStockFromProductName(productDto.getName()) == 0){
-            throw new EcommerceApplicationException("Product name: " + productDto.getName() + " doesn't have unit in stock",HttpStatus.NOT_FOUND);
+        if(productRepository.getUnitInStockFromProductName(productName) == 0){
+            throw new EcommerceApplicationException("Product name: " + productName + " doesn't have unit in stock",HttpStatus.NOT_FOUND);
         }
 
-        Product product = new Product();
-        product.setId(UUID.fromString(UUID.randomUUID().toString()));
-        product.setName(productDto.getName());
-        product.setDescription(productDto.getDescription());
-        product.setPrice(productDto.getPrice());
+        //TODO finish this
+        Productchart productChart = new Productchart();
+        productChart.setId(UUID.fromString(UUID.randomUUID().toString()));
+        productChart.setProducts(productRepository.findByName(productName));
+        productChart.setName(productName);
 
-        return productRepository.saveAndFlush(product);
+        return productchartRepository.saveAndFlush(productChart);
     }
 
     //TODO finish this
-    public Productchart finishOrder(UUID id, Productchart productchart) {
+    public Productchart finishOrder(UUID id, Productchart productChart) {
        return null;
     }
 

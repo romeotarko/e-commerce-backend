@@ -12,6 +12,8 @@ import java.util.UUID;
 public interface ProductRepository extends JpaRepository<Product, UUID> {
     boolean existsByName(String name);
 
+    List<Product> findByName(String name);
+
     @Query("select p from Product p where (:name is null or p.name like :name) and (:description is null or p.description like :description)")
     List<Product> findAllByNameOrDescription(String name, String description);
 

@@ -42,13 +42,11 @@ public class Product implements Serializable {
     private String unit_in_stock;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name = "productchart_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "productchart_id", referencedColumnName = "id", nullable = false)
     private Productchart productchart;
 
 

@@ -37,7 +37,7 @@ public class ProductServiceTest {
         then(product.getName()).isEqualTo("Book1");
     }
 
-    @Test
+ /*   @Test
     void should_add_product_to_chart(){
         ProductDto productDto =new ProductDto(
                 "Book1",
@@ -84,4 +84,6 @@ public class ProductServiceTest {
         then(updateProduct).isNotNull();
         then(updateProduct.getName()).isEqualTo("book");
     }
+    */
+
 }

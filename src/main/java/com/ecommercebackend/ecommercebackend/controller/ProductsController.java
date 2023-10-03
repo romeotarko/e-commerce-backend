@@ -51,10 +51,11 @@ public class ProductsController {
 
     @PostMapping("/addProductToChart")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Product> addProductToChart(@Valid @RequestBody ProductDto productDto) {
-        Product addProduct = productService.addProductToChart(productDto);
+    public ResponseEntity<Productchart> addProductToChart(@Valid @RequestBody String productName) {
+        Productchart addProduct = productService.addProductToChart(productName);
         return new ResponseEntity<>(addProduct, HttpStatus.OK);
     }
+
     @DeleteMapping("/removeProductFromChart")
     @PreAuthorize("hasRole('User')")
     public ResponseEntity<?> removeProductFromChart(@PathVariable("ID") UUID id){
@@ -65,8 +66,8 @@ public class ProductsController {
     //TODO finish this
     @PutMapping("/finishOrder")
     @PreAuthorize("hasRole('User')")
-    public ResponseEntity<Productchart> finishOrder(@PathVariable("ID") UUID id, @RequestBody Productchart productchart){
-        Productchart submitRequest = productService.finishOrder(id, productchart);
+    public ResponseEntity<Productchart> finishOrder(@PathVariable("ID") UUID id, @RequestBody Productchart productChart){
+        Productchart submitRequest = productService.finishOrder(id, productChart);
         return new ResponseEntity<>(submitRequest, HttpStatus.OK);
     }
 
